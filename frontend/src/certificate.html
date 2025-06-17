@@ -19,7 +19,7 @@
     .form-container h2 { margin-top:0; }
     .form-group { margin-bottom:1rem; }
     .form-group label { display:block; font-weight:bold; margin-bottom:.5rem; }
-    .form-group input { width:100%; padding:.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px; }
+    .form-group input { width:100%; padding:0.5rem; padding-right: 0.5rem; font-size:1rem; border:1px solid #ccc; border-radius:4px; box-sizing: border-box;}
     #generate-btn { display:block; margin: 1.5rem auto 0; padding:.75rem 1.5rem; background:#1a73e8; color:#fff; border:none;border-radius:4px;cursor:pointer; }
 
     /* certificate styles */
@@ -29,7 +29,7 @@
   /* no padding, so we get a true 1 000×700 canvas */
   padding: 0;
   /* stretch the template to fill the box exactly */
-  background: url('/assets/CERTIFICATE -2.png') no-repeat center center;
+  background: url('./assets/CERTIFICATE -2.png') no-repeat center center;
   background-size: 100% 100%;
   position: relative;
   overflow: hidden;  /* hide anything that spills out */
@@ -53,7 +53,7 @@
     .certificate-subtitle::before,
     .certificate-subtitle::after {
       content:""; display:inline-block; width:1em; height:1em;
-      background:url('/assets/arrow.png') no-repeat center center;
+      background:url('./assets/arrow.png') no-repeat center center;
       background-size:contain;
     }
     .certificate-subtitle::before { margin-right:.2em; transform:scaleX(1); }
@@ -72,13 +72,13 @@
       content:""; display:block; width:100%; height:2px; background:#1a73e8; margin-top:-.2em;
     }
     .date-number-section {
-      font-size:1.6rem; font-weight:bold; color:#333; margin:-0.5rem 0 -1.8rem;
+      font-size:1.1rem; font-weight:bold; color:#333; margin:-0.6rem 0 -1.8rem;
     }
 
 /* new: center the stamp under the ID number */
 .stamp-block {
   text-align: center;
-  margin: 2.7rem 0;    /* space above & below */
+  margin: 2rem 0;    /* space above & below */
     position: relative; /* for the gold seal */
     width: 100%;       /* full width of the certificate */
 }
@@ -113,13 +113,13 @@
   bottom: 20px;
   left: 5%;
   right: 5%;
+}
 
-  .date-block {
+.date-block {
   margin-left: 5rem;    /* ← pushes the date to the right */
   text-align: center;
   position: relative;
-  bottom: -30px
-}
+  bottom: -30px;
 }
 
     .date-block, .sign-block { text-align:center; position:relative;   }
@@ -147,7 +147,7 @@
 
   <!-- 1) Input form -->
   <div class="form-container">
-    <h2>Enter Certificate Details</h2>
+    <h2 style="text-align: center;">Enter Certificate Details</h2>
     <div class="form-group">
       <label for="name">Name</label>
       <input id="name" type="text" placeholder="Full Name"/>
@@ -159,12 +159,26 @@
     <div class="form-group">
       <label for="duration">Duration</label>
       <input id="duration" type="text" placeholder="12-November-2024 to 20-March-2025"/>
+      <small style="color: gray; display: block; margin-top: 0.25rem;">
+  Accepted formats: <strong>DD-MM-YYYY</strong> or <strong>DD-Month-YYYY</strong><br>
+  (e.g., 12-11-2024 or 12-November-2024)
+</small>
     </div>
+    <div class="form-group">
+  <label for="manualDays">Number of Days (optional)</label>
+  <input id="manualDays" type="number" placeholder="e.g. 128"/>
+</div>
+
+    <div class="form-group">
+  <label for="issueDate">Issue Date</label>
+  <input id="issueDate" type="date"/>
+</div>
+
     <!-- <div class="form-group">
       <label for="idNo">ID Number</label>
       <input id="idNo" type="text" placeholder="123456"/> -->
     </div>
-    <button id="generate-btn">Preview & Download PDF</button>
+    <button id="generate-btn" style="margin-bottom: 2rem;">Preview & Download PDF</button>
     
   </div> 
 
@@ -172,20 +186,18 @@
   <div class="certificate-container" id="certificate">
     <div class="certificate-content">
       <div class="certificate-header">
-        <img src="/assets/GreatHireLogo-preview.png" alt="Great Hire Logo"/>
+        <img src="./assets/GreatHireLogo-preview.png" alt="Great Hire Logo"/>
       </div>
       <h1 class="certificate-title">
         Certificate<br>
         <span class="certificate-subtitle">OF INTERNSHIP</span>
       </h1>
       <h6 class="certificate-company"><strong>Great Hire By Babde PVT LTD</strong></h6>
-      <p class="description">This certificate is awarded to</p>
+      <p class="description" style="margin-bottom: 1em;">This certificate is awarded to</p>
       <div class="recipient-name" id="cert-name">[Name]</div>
-      <p class="description" id="cert-description">
-        In recognition of <br>
-        His/ Her successfully completing the 128-days in <br>
-        [Program] Internship Program, showcasing exceptional<br>
-         performance and dedication <br>
+      <p class="description" id="cert-description" style="margin-top: 2em;">
+        In recognition of His/ Her successfully completing the 128-days in <br>
+        [Program] Internship Program, showcasing exceptional performance and dedication <br>
         conducted from [Duration].
     </p>
       </p>
@@ -198,7 +210,7 @@
       <!-- 2) center‑aligned stamp -->
       <div class="stamp-block">
         <img
-          src="/assets/stamp.png"
+          src="./assets/stamp.png"
           alt="Official Stamp"
           class="stamp-img"
         />
@@ -207,13 +219,13 @@
       <!-- 3) your date & signature row -->
       <div class="signature-section">
         <div class="date-block">
-          <div class="date-value" id="cert-date">5/8/2025</div>
+          <div class="date-value" id="cert-date">[Date]</div>
           <div class="signature-caption">Date</div>
         </div>
     
         <div class="sign-block">
           <img
-            src="/assets/image.png"
+            src="./assets/image.png"
             crossOrigin="anonymous"
             alt="Signature"
             class="signature-img"
@@ -238,15 +250,98 @@
     const idNo     = Math.floor(100000 + Math.random() * 900000).toString();
 
     document.getElementById('cert-name').innerText = name;
-    document.getElementById('cert-description').innerHTML =
-      `In recognition of<br>
-       His/Her successfully completing the 128‑days in
-       <strong>${program}</strong><br>
-       Internship Program, showcasing exceptional<br>
-       performance and dedication<br>
-       conducted from <strong>${duration}</strong>.`;
+    // Function to parse date in format "12-November-2024"
+function parseDate(str) {
+  const months = {
+    January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+    July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+  };
+  const [day, monthName, year] = str.split('-');
+  return new Date(year, months[monthName], day);
+}
+
+let numDays = 0;
+let startDateStr = '';
+let endDateStr = '';
+
+// Extract start and end dates from the duration string
+const parts = duration.split(' to ');
+if (parts.length === 2) {
+  try {
+    const start = parseDate(parts[0]);
+    const end = parseDate(parts[1]);
+    numDays = Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1; // include start day
+    startDateStr = parts[0];
+    endDateStr = parts[1];
+  } catch (e) {
+    console.error("Date parsing failed:", e);
+  }
+}
+function parseFlexibleDate(str) {
+  const monthNames = {
+    January: 0, February: 1, March: 2, April: 3, May: 4, June: 5,
+    July: 6, August: 7, September: 8, October: 9, November: 10, December: 11
+  };
+
+  const parts = str.split('-');
+  if (parts.length === 3) {
+    const day = parseInt(parts[0]);
+    const monthRaw = parts[1];
+    const year = parseInt(parts[2]);
+
+    let month;
+    if (isNaN(monthRaw)) {
+      month = monthNames[monthRaw];
+    } else {
+      month = parseInt(monthRaw) - 1;
+    }
+
+    return new Date(year, month, day);
+  }
+
+  return null;
+}
+
+const manualDaysInput = document.getElementById('manualDays').value.trim();
+const durationParts = duration.split(' to ');
+let calculatedDays = null;
+
+if (durationParts.length === 2) {
+  const start = parseFlexibleDate(durationParts[0]);
+  const end = parseFlexibleDate(durationParts[1]);
+  if (start && end && end > start) {
+    calculatedDays = Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1;
+  }
+}
+
+const numberOfDays = manualDaysInput || calculatedDays || '___';
+
+document.getElementById('cert-description').innerHTML =
+  `In recognition of His/Her successfully completing the ${numberOfDays}-days in
+   <strong>${program}</strong><br>
+   Internship Program, showcasing exceptional performance and dedication<br>
+   conducted from <strong>${duration}</strong>.`;
+
+
     document.getElementById('cert-id').innerText   = idNo;
-    document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
+    const issueDateInput = document.getElementById('issueDate').value;
+function formatDateDMY(dateStr) {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const dateObj = new Date(dateStr);
+  const day = dateObj.getDate();
+  const month = months[dateObj.getMonth()];
+  const year = dateObj.getFullYear();
+  return `${day} ${month} ${year}`;
+}
+
+const formattedDate = issueDateInput
+  ? formatDateDMY(issueDateInput)
+  : formatDateDMY(new Date().toISOString());
+
+document.getElementById('cert-date').innerText = formattedDate;
 
     // --- 2) Force fixed 1000×700px container size ---
     const certEl = document.getElementById('certificate');
@@ -270,24 +365,25 @@
     });
     pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
     pdf.save(`${name.replace(/\s+/g,'_')}_certificate.pdf`);
-    // --- 5) Save data to MongoDB ---
-fetch(`${import.meta.env.VITE_API_URL}/certificates`), {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: name,
-    program: program,
-    duration: duration,
-    idNumber: idNo,
-    date: new Date().toISOString()
-  })
-})
-.then(response => response.json())
-.then(data => console.log('Certificate saved:', data))
-.catch(error => console.error('Error saving to database:', error));
-  });
+  // 5) Save data to MongoDB 
+    fetch(`${import.meta.env.VITE_API_URL}/certificates`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        program: program,
+        duration: duration,
+        idNumber: idNo,
+        date: new Date().toISOString()
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Certificate saved:', data))
+    .catch(error => console.error('Error saving to database:', error));
+  
+});
 </script>
 
 </body>
